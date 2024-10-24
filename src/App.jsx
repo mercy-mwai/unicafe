@@ -8,7 +8,13 @@ const Button = (props) => {
   );
 };
 
-const Statistics = (props) => {
+const StatisticLine = ({ text, value }) => (
+  <div>
+    {text}: {value}
+  </div>
+);
+
+const Statistics= (props) => {
   const { good, neutral, bad } = props;
 
   const total = good + neutral + bad;
@@ -24,14 +30,12 @@ const Statistics = (props) => {
   }
   return (
     <div>
-      <p>Statistics</p>
-      <p>Good: {good}</p>
-      <p>Neutral: {neutral}</p>
-      <p>Bad: {bad}</p>
-      <p>Total: {total}</p>
-      <p>Average: {average.toFixed(2)}</p>
-      <p>Positive: {positivePercentage.toFixed(2)}%</p>
-    </div>
+    <StatisticLine text="good" value ={good} />
+    <StatisticLine text="neutral" value ={neutral} />
+    <StatisticLine text="bad" value ={bad} />
+    <StatisticLine text="bad" value ={average.toFixed(2)} />
+    <StatisticLine text="positive" value ={positivePercentage.toFixed(2)} />
+  </div>
   );
 };
 
@@ -50,6 +54,7 @@ const App = () => {
       <Button handleClick={handleGoodClick} text="good" />
       <Button handleClick={handleNeutralClick} text="neutral" />
       <Button handleClick={handleBadClick} text="bad" />
+      <p>Statistics</p>
       <Statistics good={good} neutral={neutral} bad={bad} />
     </div>
   );
