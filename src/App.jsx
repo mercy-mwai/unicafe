@@ -30,12 +30,33 @@ const Statistics= (props) => {
   }
   return (
     <div>
-    <StatisticLine text="good" value ={good} />
-    <StatisticLine text="neutral" value ={neutral} />
-    <StatisticLine text="bad" value ={bad} />
-    <StatisticLine text="bad" value ={average.toFixed(2)} />
-    <StatisticLine text="positive" value ={positivePercentage.toFixed(2)} />
+    <table>
+      <tbody>
+        <tr>
+          <td>Good</td>
+          <td>{good}</td>
+        </tr>
+        <tr>
+          <td>Neutral</td>
+          <td>{neutral}</td>
+        </tr>
+        <tr>
+          <td>Bad</td>
+          <td>{bad}</td>
+        </tr>
+        <tr>
+          <td>Average</td>
+          <td>{average.toFixed(2)}</td>
+        </tr>
+        <tr>
+          <td>Positive</td>
+          <td>{positivePercentage.toFixed(2)}%</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
+  
+  
   );
 };
 
