@@ -10,7 +10,6 @@ const Button = (props) => {
 
 const StatisticLine = ({ text, value }) => {
   return(
-    
       <tr>
         <td>{text}</td>
         <td>{value}</td>
@@ -67,6 +66,13 @@ const displayRandomAnecdote = () => {
   setSelected(randomIndex);
 };
 
+const voteForAnecdote = () => {
+  const copy = [...votes];
+  copy[selected] += 1;
+  setVotes(copy);
+};
+
+  const [votes, setVotes] = useState(new Array(anecdotes.length).fill(0));
   const [selected,setSelected]=useState(0)
   const [good, setGood] = useState(0);
   const [neutral, setNeutral] = useState(0);
@@ -85,7 +91,9 @@ const displayRandomAnecdote = () => {
       <p>Statistics</p>
       <Statistics good={good} neutral={neutral} bad={bad} />
       <p>{anecdotes[selected]}</p>
-      <button onClick={displayRandomAnecdote}>Show random anecdote</button>
+      <button onClick={displayRandomAnecdote}>Next anecdote</button>
+      <p>Votes: {votes[selected]}</p>
+      <button onClick={voteForAnecdote}>Vote</button>
     </div>
   );
 };
