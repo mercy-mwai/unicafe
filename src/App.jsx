@@ -61,10 +61,9 @@ const anecdotes=[
 
 ]
 
-const displayRandomAnecdote = () => {
-  const randomIndex = Math.floor(Math.random() * anecdotes.length);
-  setSelected(randomIndex);
-};
+const [votes, setVotes] = useState(new Array(anecdotes.length).fill(0));
+const [selected,setSelected]=useState(0);
+
 
 const voteForAnecdote = () => {
   const copy = [...votes];
@@ -72,8 +71,15 @@ const voteForAnecdote = () => {
   setVotes(copy);
 };
 
-  const [votes, setVotes] = useState(new Array(anecdotes.length).fill(0));
-  const [selected,setSelected]=useState(0)
+const displayRandomAnecdote = () => {
+  const randomIndex = Math.floor(Math.random() * anecdotes.length);
+  setSelected(randomIndex);
+};
+
+const maxVotes = Math.max(...votes);
+const maxVotesIndex = votes.indexOf(maxVotes);
+const maxVotesAnecdote = anecdotes[maxVotesIndex];
+
   const [good, setGood] = useState(0);
   const [neutral, setNeutral] = useState(0);
   const [bad, setBad] = useState(0);
@@ -84,16 +90,27 @@ const voteForAnecdote = () => {
 
   return (
     <div>
-      <p>Give feedback</p>
+      <h2>Give feedback</h2>
       <Button handleClick={handleGoodClick} text="good" />
       <Button handleClick={handleNeutralClick} text="neutral" />
       <Button handleClick={handleBadClick} text="bad" />
-      <p>Statistics</p>
+      <h2>Statistics</h2>
       <Statistics good={good} neutral={neutral} bad={bad} />
+      <h2>Anecdote of the day</h2>
       <p>{anecdotes[selected]}</p>
-      <button onClick={displayRandomAnecdote}>Next anecdote</button>
       <p>Votes: {votes[selected]}</p>
       <button onClick={voteForAnecdote}>Vote</button>
+      <button onClick={displayRandomAnecdote}>Next anecdote</button>
+
+      <h2>Anecdote with the highest votes</h2>
+      {maxVotes > 0 ? (
+        <div>
+          <p>{maxVotesAnecdote}</p>
+          <p>Has {maxVotes} votes</p>
+        </div>
+      ) : (
+        <p>No votes yet</p>
+      )}
     </div>
   );
 };
